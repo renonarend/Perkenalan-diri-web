@@ -10,27 +10,42 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
+            background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
             color: #f3f4f6;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hover-scale {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-scale:hover {
+            transform: translateY(-3px);
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.15);
         }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 sm:p-6">
 
-    <div class="w-full max-w-md bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+    <div class="w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
         
         <!-- Header / Judul Website -->
         <div class="text-center">
-            <span class="px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold rounded-full uppercase tracking-wider">
+            <span class="px-3.5 py-1.5 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold rounded-full uppercase tracking-wider shadow-inner">
                 Website gw, gabut ajah
             </span>
         </div>
 
         <!-- Profil Utama -->
         <div class="flex flex-col items-center text-center space-y-4">
-            <!-- Foto Profil (Ganti src ke nama file foto lu kalau mau pakai file lokal) -->
-            <div class="relative">
-                <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-cyan-500/30 shadow-lg bg-slate-800">
+            <!-- Foto Profil -->
+            <div class="relative group">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
+                <div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-800 shadow-xl">
                     <img src="IMG_20261119_134726.jpg" alt="Reno" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80'">
                 </div>
             </div>
@@ -41,39 +56,39 @@
             </div>
 
             <!-- Bio -->
-            <div class="w-full bg-slate-800/50 border border-slate-700/50 rounded-2xl p-3 text-center">
+            <div class="w-full bg-slate-800/40 border border-slate-700/40 rounded-2xl p-3 text-center shadow-inner">
                 <p class="text-sm text-slate-300 italic">"Ubur-ubur ikan lele, muka lu jelek le"</p>
             </div>
 
             <!-- Tombol Kontak -->
-            <div class="flex flex-col sm:flex-row gap-3 w-full pt-2">
-                <a href="https://discord.gg/CnppvSDsW2" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/20">
-                    <i class="fa-brands fa-discord"></i> Discord
+            <div class="flex flex-col sm:flex-row gap-3 w-full pt-1">
+                <a href="https://discord.gg/CnppvSDsW2" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/25 hover:scale-[1.02]">
+                    <i class="fa-brands fa-discord text-base"></i> Discord
                 </a>
-                <a href="https://wa.me/6281932421812" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-emerald-600/20">
-                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                <a href="https://wa.me/6281932421812" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-emerald-600/25 hover:scale-[1.02]">
+                    <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
                 </a>
             </div>
         </div>
 
         <!-- Hobi (Grid 2x2) -->
         <div class="space-y-3">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400">Hobi</h2>
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">Hobi</h2>
             <div class="grid grid-cols-2 gap-3">
-                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold">🏊</div>
+                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg">🏊‍♂️</div>
                     <span class="text-sm font-semibold text-white">Renang</span>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold">🏸</div>
+                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">🏸</div>
                     <span class="text-sm font-semibold text-white">Bulutangkis</span>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center font-bold">💻</div>
+                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-lg">💻</div>
                     <span class="text-sm font-semibold text-white">IT</span>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold">🥁</div>
+                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-lg">🥁</div>
                     <span class="text-sm font-semibold text-white">Drum</span>
                 </div>
             </div>
@@ -81,42 +96,42 @@
 
         <!-- Inner Circle / Temen Deket -->
         <div class="space-y-3">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400">Circle Gue</h2>
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">Circle Gue</h2>
             <div class="space-y-2.5">
                 <!-- Efraim -->
-                <div class="bg-slate-800/40 border border-slate-700/40 p-3 rounded-2xl flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-700 flex-shrink-0 border border-slate-600">
+                <div class="glass-card hover-scale p-3 rounded-2xl flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
                         <img src="IMG-20261119-WA0001.jpg" alt="Efraim" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
                     </div>
                     <div>
                         <h3 class="text-sm font-bold text-white">Efraim</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">temen banyak bacot tapi jago bultang</p>
+                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">temen banyak bacot tapi jago bultang</p>
                     </div>
                 </div>
 
                 <!-- Indra -->
-                <div class="bg-slate-800/40 border border-slate-700/40 p-3 rounded-2xl flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-700 flex-shrink-0 border border-slate-600 flex items-center justify-center text-slate-300 font-bold">I</div>
+                <div class="glass-card hover-scale p-3 rounded-2xl flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-700 flex-shrink-0 border border-slate-700 flex items-center justify-center text-white font-bold text-base shadow-md">I</div>
                     <div>
                         <h3 class="text-sm font-bold text-white">Indra</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">temen ego besar temen mabar suka voli</p>
+                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">temen ego besar temen mabar suka voli</p>
                     </div>
                 </div>
 
                 <!-- Gavin -->
-                <div class="bg-slate-800/40 border border-slate-700/40 p-3 rounded-2xl flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-700 flex-shrink-0 border border-slate-600 flex items-center justify-center text-slate-300 font-bold">G</div>
+                <div class="glass-card hover-scale p-3 rounded-2xl flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-700 flex-shrink-0 border border-slate-700 flex items-center justify-center text-white font-bold text-base shadow-md">G</div>
                     <div>
                         <h3 class="text-sm font-bold text-white">Gavin</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">keren dikit, suka futsal, temen mabar</p>
+                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">keren dikit, suka futsal, temen mabar</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
-        <div class="text-center pt-2">
-            <p class="text-xs text-slate-500">© 2026 Reno. All rights reserved.</p>
+        <div class="text-center pt-1">
+            <p class="text-xs text-slate-500 font-medium">© 2026 Reno. All rights reserved.</p>
         </div>
 
     </div>
