@@ -27,6 +27,7 @@
             border-radius: 50px;
             z-index: -1;
             animation: floatGlow 8s ease-in-out infinite alternate;
+            will-change: transform;
         }
 
         @keyframes floatGlow {
@@ -34,18 +35,21 @@
             100% { transform: translate(50px, 50px); }
         }
 
-        /* Glassmorphism Card Style */
+        /* Glassmorphism Card Style + Anti Lag Optimization */
         .glass-box {
             background: rgba(13, 19, 33, 0.85);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         /* Smooth Hover Effects */
         .interactive-card {
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: transform;
         }
         .interactive-card:hover {
             transform: translateY(-4px) scale(1.01);
@@ -61,17 +65,18 @@
         }
         .profile-ring {
             animation: pulseRing 4s infinite ease-in-out;
+            will-change: transform, opacity;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative">
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-10 relative">
 
     <!-- Background Glow Elements -->
     <div class="bg-glow top-10 left-10"></div>
     <div class="bg-glow bottom-10 right-10" style="background: rgba(99, 102, 241, 0.12);"></div>
 
-    <!-- Sidebar / Floating Nav -->
-    <aside class="hidden xl:flex flex-col fixed left-8 top-1/2 -translate-y-1/2 glass-box p-3 rounded-2xl space-y-4 z-20">
+    <!-- Sidebar / Floating Nav (Muncul di layar lebar) -->
+    <aside class="hidden 2xl:flex flex-col fixed left-8 top-1/2 -translate-y-1/2 glass-box p-3 rounded-2xl space-y-4 z-20">
         <a href="#profile" title="Profil" class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition-all">
             <i class="fa-solid fa-user text-sm"></i>
         </a>
@@ -86,173 +91,188 @@
         </a>
     </aside>
 
-    <main class="w-full max-w-md glass-box rounded-3xl p-6 sm:p-8 space-y-6 relative z-10">
+    <!-- Main Container: Vertikal di HP (max-w-md), Horizontal di Desktop (lg:max-w-5xl) -->
+    <main class="w-full max-w-md lg:max-w-5xl glass-box rounded-3xl p-6 sm:p-8 lg:p-10 relative z-10">
         
-        <!-- Header / Judul Website -->
-        <div class="text-center">
-            <span class="inline-block px-4 py-1.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-extrabold rounded-full uppercase tracking-widest shadow-sm">
-                Website gw, gabut ajah
-            </span>
-        </div>
-
-        <!-- Profil Utama -->
-        <div id="profile" class="flex flex-col items-center text-center space-y-4">
-            <!-- Foto Profil -->
-            <div class="relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full profile-ring"></div>
-                <div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-800 shadow-2xl">
-                    <img src="IMG_20261119_170046.jpg" alt="Reno" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80'">
+        <div class="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-10">
+            
+            <!-- KOLOM KIRI (Desktop) / ATAS (HP): Profil Utama -->
+            <div id="profile" class="w-full lg:w-[38%] lg:sticky lg:top-10 flex flex-col items-center text-center space-y-5 lg:border-r lg:border-white/10 lg:pr-8">
+                
+                <!-- Header Badge -->
+                <div>
+                    <span class="inline-block px-4 py-1.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-extrabold rounded-full uppercase tracking-widest shadow-sm">
+                        Website gw, gabut ajah
+                    </span>
                 </div>
-            </div>
 
-            <div>
-                <h1 class="text-2xl font-extrabold tracking-tight text-white">Natanael Alfareno Narendra <span class="text-cyan-400 font-normal text-lg">(Reno)</span></h1>
-                <p class="text-sm text-slate-400 font-semibold mt-1">SMP Pangudi Luhur Jakarta</p>
-            </div>
-
-            <!-- Bio -->
-            <div class="w-full bg-slate-900/60 border border-slate-800 rounded-2xl p-3.5 text-center shadow-inner">
-                <p class="text-sm text-slate-300 italic font-medium">"Ubur-ubur ikan lele, muka lu jelek le"</p>
-            </div>
-
-            <!-- Tombol Kontak -->
-            <div class="flex gap-3 w-full pt-1">
-                <a href="https://discord.gg/CnppvSDsW2" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95">
-                    <i class="fa-brands fa-discord text-base"></i> Discord
-                </a>
-                <a href="https://wa.me/6281932421812" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:scale-105 active:scale-95">
-                    <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
-                </a>
-            </div>
-        </div>
-
-        <!-- Hobi (Grid 2x2) -->
-        <div id="hobi" class="space-y-3">
-            <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Hobi</h2>
-            <div class="grid grid-cols-2 gap-3">
-                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-lg shadow-inner">🏊‍♂️</div>
-                    <span class="text-sm font-bold text-white">Renang</span>
-                </div>
-                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg shadow-inner">🏸</div>
-                    <span class="text-sm font-bold text-white">Bulutangkis</span>
-                </div>
-                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-violet-500/15 text-violet-400 flex items-center justify-center text-lg shadow-inner">💻</div>
-                    <span class="text-sm font-bold text-white">IT</span>
-                </div>
-                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-lg shadow-inner">🥁</div>
-                    <span class="text-sm font-bold text-white">Drum</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Inner Circle / My Best Friends -->
-        <div id="circle" class="space-y-3">
-            <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">My Best Friends</h2>
-            <div class="space-y-2.5">
-                <!-- Efraim -->
-                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center justify-between gap-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
-                            <img src="IMG-20261119-WA0001.jpg" alt="Efraim" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">Efraim</h3>
-                            <p class="text-xs text-slate-400 mt-0.5 leading-relaxed font-medium">temen banyak bacot tapi mayan jago bultang</p>
-                        </div>
+                <!-- Foto Profil -->
+                <div class="relative pt-1">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full profile-ring"></div>
+                    <div class="relative w-32 h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-800 shadow-2xl">
+                        <img src="IMG_20261119_170046.jpg" alt="Reno" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80'">
                     </div>
-                    <a href="https://wa.me/628118988466" target="_blank" title="Chat Efraim" class="w-10 h-10 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 flex items-center justify-center transition-all flex-shrink-0">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                </div>
+
+                <div>
+                    <h1 class="text-2xl font-extrabold tracking-tight text-white">Natanael Alfareno Narendra <span class="text-cyan-400 font-normal text-lg block sm:inline">(Reno)</span></h1>
+                    <p class="text-sm text-slate-400 font-semibold mt-1">SMP Pangudi Luhur Jakarta</p>
+                </div>
+
+                <!-- Bio -->
+                <div class="w-full bg-slate-900/60 border border-slate-800 rounded-2xl p-3.5 text-center shadow-inner">
+                    <p class="text-sm text-slate-300 italic font-medium">"Ubur-ubur ikan lele, muka lu jelek le"</p>
+                </div>
+
+                <!-- Tombol Kontak -->
+                <div class="flex gap-3 w-full pt-1">
+                    <a href="https://discord.gg/CnppvSDsW2" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95">
+                        <i class="fa-brands fa-discord text-base"></i> Discord
+                    </a>
+                    <a href="https://wa.me/6281932421812" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:scale-105 active:scale-95">
+                        <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
                     </a>
                 </div>
 
-                <!-- Indra (Ganti nama file fotoindra.jpg nanti di src kalau udah ada fotonya) -->
-                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center justify-between gap-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
-                            <img src="images (9).jpeg" alt="Indra" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">Indra</h3>
-                            <p class="text-xs text-slate-400 mt-0.5 leading-relaxed font-medium">temen ego besar, temen mabar, suka voli</p>
-                        </div>
-                    </div>
-                    <a href="https://wa.me/6282147489455" target="_blank" title="Chat Indra" class="w-10 h-10 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 flex items-center justify-center transition-all flex-shrink-0">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                    </a>
-                </div>
-
-                <!-- Gavin (Sudah di-set pakai IMG_20261119_152015.jpg) -->
-                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center justify-between gap-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
-                            <img src="IMG_20261119_152015.jpg" alt="Gavin" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">Gavin</h3>
-                            <p class="text-xs text-slate-400 mt-0.5 leading-relaxed font-medium">keren, suka futsal, temen mabar</p>
-                        </div>
-                    </div>
-                    <a href="https://wa.me/6285600593929" target="_blank" title="Chat Gavin" class="w-10 h-10 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 flex items-center justify-center transition-all flex-shrink-0">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                    </a>
+                <!-- Footer Desktop (Pindah ke kiri bawah pas di layar lebar) -->
+                <div class="hidden lg:block pt-4">
+                    <p class="text-xs text-slate-500 font-semibold">© 2026 Reno. All rights reserved.</p>
                 </div>
             </div>
+
+            <!-- KOLOM KANAN (Desktop) / BAWAH (HP): Hobi, Circle & Projects -->
+            <div class="w-full lg:w-[62%] space-y-6">
+                
+                <!-- Hobi (Grid 2x2 di HP, 4 kolom sejajar di Desktop) -->
+                <div id="hobi" class="space-y-3">
+                    <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Hobi</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                            <div class="w-9 h-9 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-lg shadow-inner flex-shrink-0">🏊‍♂️</div>
+                            <span class="text-sm font-bold text-white">Renang</span>
+                        </div>
+                        <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                            <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg shadow-inner flex-shrink-0">🏸</div>
+                            <span class="text-sm font-bold text-white">Bulutangkis</span>
+                        </div>
+                        <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                            <div class="w-9 h-9 rounded-xl bg-violet-500/15 text-violet-400 flex items-center justify-center text-lg shadow-inner flex-shrink-0">💻</div>
+                            <span class="text-sm font-bold text-white">IT</span>
+                        </div>
+                        <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                            <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-lg shadow-inner flex-shrink-0">🥁</div>
+                            <span class="text-sm font-bold text-white">Drum</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inner Circle / My Best Friends -->
+                <div id="circle" class="space-y-3">
+                    <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">My Best Friends</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-2.5">
+                        <!-- Efraim -->
+                        <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-11 h-11 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
+                                    <img src="IMG-20261119-WA0001.jpg" alt="Efraim" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm font-bold text-white truncate">Efraim</h3>
+                                    <p class="text-xs text-slate-400 mt-0.5 leading-snug font-medium">temen banyak bacot tapi mayan jago bultang</p>
+                                </div>
+                            </div>
+                            <a href="https://wa.me/628118988466" target="_blank" title="Chat Efraim" class="w-9 h-9 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 flex items-center justify-center transition-all flex-shrink-0">
+                                <i class="fa-brands fa-whatsapp text-base"></i>
+                            </a>
+                        </div>
+
+                        <!-- Indra -->
+                        <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-11 h-11 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
+                                    <img src="images (9).jpeg" alt="Indra" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm font-bold text-white truncate">Indra</h3>
+                                    <p class="text-xs text-slate-400 mt-0.5 leading-snug font-medium">temen ego besar, temen mabar, suka voli</p>
+                                </div>
+                            </div>
+                            <a href="https://wa.me/6282147489455" target="_blank" title="Chat Indra" class="w-9 h-9 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 flex items-center justify-center transition-all flex-shrink-0">
+                                <i class="fa-brands fa-whatsapp text-base"></i>
+                            </a>
+                        </div>
+
+                        <!-- Gavin -->
+                        <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-11 h-11 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
+                                    <img src="IMG_20261119_152015.jpg" alt="Gavin" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm font-bold text-white truncate">Gavin</h3>
+                                    <p class="text-xs text-slate-400 mt-0.5 leading-snug font-medium">keren, suka futsal, temen mabar</p>
+                                </div>
+                            </div>
+                            <a href="https://wa.me/6285600593929" target="_blank" title="Chat Gavin" class="w-9 h-9 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 flex items-center justify-center transition-all flex-shrink-0">
+                                <i class="fa-brands fa-whatsapp text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project yang telah gw buat (1 kolom di HP, 2 kolom grid di Desktop) -->
+                <div id="projects" class="space-y-3">
+                    <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Project yang telah gw buat</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <!-- Project 1 -->
+                        <div class="glass-box interactive-card p-4 rounded-2xl space-y-2 md:col-span-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
+                                    <i class="fa-solid fa-server"></i> Server MC
+                                </h3>
+                                <span class="px-2.5 py-0.5 bg-cyan-500/15 text-cyan-300 text-[10px] font-extrabold rounded-full">Active</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed font-medium">
+                                Server minecraft gw yang gw buat dan punya 80+ member aktif dan saat ini sudah untung 300K dan sudah ada sejak 25 Juni 2026
+                            </p>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="glass-box interactive-card p-4 rounded-2xl space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i> Jasa Setup Server
+                                </h3>
+                                <span class="px-2.5 py-0.5 bg-indigo-500/15 text-indigo-300 text-[10px] font-extrabold rounded-full">Open</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed font-medium">
+                                Gw membuka jasa setup server minecraft bagi yang tidak paham port, IP, domain, dan lainnya mulai dari 10K 
+                            </p>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="glass-box interactive-card p-4 rounded-2xl space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
+                                    <i class="fa-solid fa-code"></i> Jasa Buat Website (AI) 
+                                </h3>
+                                <span class="px-2.5 py-0.5 bg-cyan-500/15 text-cyan-300 text-[10px] font-extrabold rounded-full">Open</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed font-medium">
+                                Selain jasa setup server minecraft gw juga buka jasa buat website dengan AI namun akan dibuatkan akses link, domain, dan lainnya mulai dari 5K
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Mobile (Muncul cuma pas dibuka di HP) -->
+                <div class="text-center pt-2 lg:hidden">
+                    <p class="text-xs text-slate-500 font-semibold">© 2026 Reno. All rights reserved.</p>
+                </div>
+
+            </div>
+
         </div>
-
-        <!-- Project yang telah gw buat -->
-        <div id="projects" class="space-y-3">
-            <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Project yang telah gw buat</h2>
-            <div class="space-y-2.5">
-                <!-- Project 1 -->
-                <div class="glass-box interactive-card p-4 rounded-2xl space-y-2">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
-                            <i class="fa-solid fa-server"></i> Server MC
-                        </h3>
-                        <span class="px-2.5 py-0.5 bg-cyan-500/15 text-cyan-300 text-[10px] font-extrabold rounded-full">Active</span>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-medium">
-                        Server minecraft gw yang gw buat dan punya 80+ member aktif dan saat ini sudah untung 300K dan sudah ada sejak 25 Juni 2026
-                    </p>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="glass-box interactive-card p-4 rounded-2xl space-y-2">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
-                            <i class="fa-solid fa-screwdriver-wrench"></i> Jasa Setup Server
-                        </h3>
-                        <span class="px-2.5 py-0.5 bg-indigo-500/15 text-indigo-300 text-[10px] font-extrabold rounded-full">Open</span>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-medium">
-                        Gw membuka jasa setup server minecraft bagi yang tidak paham port, IP, domain, dan lainnya mulai dari 10K 
-                    </p>
-                </div>
-            </div>
-               <!-- Project 3 -->
-               <div class="glass-box interactive-card p-4 rounded-2xl space-y-2">
-                   <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
-                            <i class="fa-solid fa-screwdriver-wrench"></i> Jasa Buat Website (AI) 
-                        </h3>
-                        <span class="px-2.5 py-0.5 bg-cyan-500/15 text-cyan-300 text-[10px] font-extrabold rounded-full">Open</span>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed font-medium">
-                        Selain jasa setup server minecraft gw juga buka jasa buat website dengan AI namun akan dibuatkan akses link, domain, dan lainnya mulai dari 5K
-                    </p>
-                </div>
-            </div>
-    </div>
-
-        <!-- Footer -->
-        <div class="text-center pt-2">
-            <p class="text-xs text-slate-500 font-semibold">© 2026 Reno. All rights reserved.</p>
-        </div>
-
     </main>
 
 </body>
