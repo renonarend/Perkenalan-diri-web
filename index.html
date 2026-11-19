@@ -65,7 +65,7 @@
             <!-- Garis Aksen Neon Atas -->
             <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-500 via-cyan-400 to-purple-500"></div>
 
-            <!-- Foto Profil Auto-Crop Orang Paling Kiri dari 1000158491.jpg -->
+            <!-- Foto Profil Auto-Crop Orang Paling Kiri dari IMG-20261020-WA0007.jpg -->
             <div class="flex flex-col items-center text-center">
                 <div class="relative mb-4 group">
                     <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500 shadow-xl shadow-cyan-500/20">
@@ -75,13 +75,13 @@
                             
                             <!-- Fallback CSS Zoom tepat ke wajah orang paling kiri -->
                             <img id="avatarFallbackImg"
-                                 src="1000158491.jpg"
+                                 src="IMG-20261020-WA0007.jpg"
                                  alt="Reno"
                                  style="object-position: 18% 22%; transform: scale(2.8);"
                                  class="w-full h-full object-cover transition-transform duration-500"
                                  onerror="this.style.display='none'; document.getElementById('avatarSvgFallback').classList.remove('hidden');">
                             
-                            <!-- Fallback Avatar Default WhatsApp jika file 1000158491.jpg tidak ditemukan -->
+                            <!-- Fallback Avatar Default WhatsApp jika file IMG-20261020-WA0007.jpg tidak ditemukan -->
                             <svg id="avatarSvgFallback" viewBox="0 0 212 212" class="hidden w-full h-full" fill="currentColor" aria-label="Avatar Default">
                                 <rect width="212" height="212" fill="#3f3f46"></rect>
                                 <path fill="#a1a1aa" d="M106 116.5c21.8 0 39.5-17.7 39.5-39.5S127.8 37.5 106 37.5 66.5 55.2 66.5 77s17.7 39.5 39.5 39.5zm0 19.8c-26.4 0-79 13.2-79 39.5V212h158v-36.2c0-26.3-52.6-39.5-79-39.5z"></path>
@@ -287,7 +287,7 @@
     <!-- Script Auto-Crop Foto & Copy Clipboard -->
     <script>
         /**
-         * Auto-crop wajah orang paling kiri dari gambar 1000158491.jpg menggunakan HTML5 Canvas
+         * Auto-crop wajah orang paling kiri dari gambar IMG-20261020-WA0007.jpg menggunakan HTML5 Canvas
          */
         function cropLeftPersonAvatar() {
             const canvas = document.getElementById('avatarCanvas');
@@ -295,7 +295,7 @@
             if (!canvas || !fallbackImg) return;
 
             const img = new Image();
-            img.src = '1000158491.jpg';
+            img.src = 'IMG-20261020-WA0007.jpg';
 
             img.onload = function () {
                 try {
@@ -304,66 +304,10 @@
                     canvas.width = size;
                     canvas.height = size;
 
-                    // Koordinat wajah & bahu orang paling kiri pada foto 1000158491.jpg
+                    // Koordinat wajah & bahu orang paling kiri pada foto IMG-20261020-WA0007.jpg
                     const sx = img.naturalWidth * 0.04;
                     const sy = img.naturalHeight * 0.26;
                     const sWidth = img.naturalWidth * 0.28;
                     const sHeight = sWidth;
-
-                    ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, size, size);
-
-                    canvas.classList.remove('hidden');
-                    fallbackImg.classList.add('hidden');
-                } catch (e) {
-                    // Tetap gunakan fallback CSS zoom jika canvas dibatasi
-                }
-            };
-        }
-
-        /**
-         * Menampilkan notifikasi toast singkat
-         */
-        let toastTimeout;
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            if (!toast || !toastMessage) return;
-
-            toastMessage.textContent = message;
-            toast.classList.remove('opacity-0', 'translate-y-4');
-            toast.classList.add('opacity-100', 'translate-y-0');
-
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('opacity-100', 'translate-y-0');
-                toast.classList.add('opacity-0', 'translate-y-4');
-            }, 2200);
-        }
-
-        /**
-         * Menyalin teks ke clipboard
-         */
-        function copyText(text, successMessage) {
-            const tempInput = document.createElement('input');
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            tempInput.setSelectionRange(0, 99999);
-
-            try {
-                document.execCommand('copy');
-                showToast(successMessage);
-            } catch (err) {
-                showToast('Gagal salin');
-            }
-
-            document.body.removeChild(tempInput);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            cropLeftPersonAvatar();
-        });
-    </script>
-</body>
-</html>
+// ... existing code ... -->
 ```
