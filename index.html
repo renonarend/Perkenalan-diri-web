@@ -69,7 +69,23 @@
     <div class="bg-glow top-10 left-10"></div>
     <div class="bg-glow bottom-10 right-10" style="background: rgba(99, 102, 241, 0.12);"></div>
 
-    <div class="w-full max-w-md glass-box rounded-3xl p-6 sm:p-8 space-y-6 relative z-10">
+    <!-- Sidebar / Floating Nav (Opsional/Boleh) -->
+    <aside class="hidden xl:flex flex-col fixed left-8 top-1/2 -translate-y-1/2 glass-box p-3 rounded-2xl space-y-4 z-20">
+        <a href="#profil" title="Profil" class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition-all">
+            <i class="fa-solid fa-user text-sm"></i>
+        </a>
+        <a href="#hobi" title="Hobi" class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition-all">
+            <i class="fa-solid fa-gamepad text-sm"></i>
+        </a>
+        <a href="#circle" title="Circle" class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition-all">
+            <i class="fa-solid fa-users text-sm"></i>
+        </a>
+        <a href="#projects" title="Projects" class="w-11 h-11 rounded-xl bg-slate-800 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition-all">
+            <i class="fa-solid fa-code text-sm"></i>
+        </a>
+    </aside>
+
+    <main class="w-full max-w-md glass-box rounded-3xl p-6 sm:p-8 space-y-6 relative z-10">
         
         <!-- Header / Judul Website -->
         <div class="text-center">
@@ -79,7 +95,7 @@
         </div>
 
         <!-- Profil Utama -->
-        <div class="flex flex-col items-center text-center space-y-4">
+        <div id="profil" class="flex flex-col items-center text-center space-y-4">
             <!-- Foto Profil -->
             <div class="relative">
                 <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full profile-ring"></div>
@@ -110,7 +126,7 @@
         </div>
 
         <!-- Hobi (Grid 2x2) -->
-        <div class="space-y-3">
+        <div id="hobi" class="space-y-3">
             <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Hobi</h2>
             <div class="grid grid-cols-2 gap-3">
                 <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
@@ -133,7 +149,7 @@
         </div>
 
         <!-- Inner Circle / Temen Deket -->
-        <div class="space-y-3">
+        <div id="circle" class="space-y-3">
             <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Circle Gue</h2>
             <div class="space-y-2.5">
                 <!-- Efraim -->
@@ -182,12 +198,44 @@
             </div>
         </div>
 
+        <!-- Project yang telah gw buat -->
+        <div id="projects" class="space-y-3">
+            <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Project yang telah gw buat</h2>
+            <div class="space-y-2.5">
+                <!-- Project 1 -->
+                <div class="glass-box interactive-card p-4 rounded-2xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
+                            <i class="fa-solid fa-server"></i> Server MC
+                        </h3>
+                        <span class="px-2.5 py-0.5 bg-cyan-500/15 text-cyan-300 text-[10px] font-extrabold rounded-full">Active</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed font-medium">
+                        Server minecraft gw yang gw buat dan punya 80+ member aktif
+                    </p>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-box interactive-card p-4 rounded-2xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> Jasa Setup Server
+                        </h3>
+                        <span class="px-2.5 py-0.5 bg-indigo-500/15 text-indigo-300 text-[10px] font-extrabold rounded-full">Open</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed font-medium">
+                        Gw membuka jasa setup server minecraft bagi yang tidak paham port, IP, domain, dan lainnya
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <!-- Footer -->
         <div class="text-center pt-2">
             <p class="text-xs text-slate-500 font-semibold">© 2026 Reno. All rights reserved.</p>
         </div>
 
-    </div>
+    </main>
 
 </body>
 </html>
