@@ -8,34 +8,72 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+            background: #05070c;
             color: #f3f4f6;
+            overflow-x: hidden;
         }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+
+        /* Background Animated Glow */
+        .bg-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: rgba(6, 182, 212, 0.12);
+            filter: blur(100px);
+            border-radius: 50px;
+            z-index: -1;
+            animation: floatGlow 8s ease-in-out infinite alternate;
         }
-        .hover-scale {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        @keyframes floatGlow {
+            0% { transform: translate(-50px, -50px); }
+            100% { transform: translate(50px, 50px); }
         }
-        .hover-scale:hover {
-            transform: translateY(-3px);
-            border-color: rgba(6, 182, 212, 0.4);
-            box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.15);
+
+        /* Glassmorphism Card Style */
+        .glass-box {
+            background: rgba(13, 19, 33, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Smooth Hover Effects */
+        .interactive-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .interactive-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.25);
+        }
+
+        /* Profile Glow Animation */
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+        .profile-ring {
+            animation: pulseRing 4s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative">
 
-    <div class="w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+    <!-- Background Glow Elements -->
+    <div class="bg-glow top-10 left-10"></div>
+    <div class="bg-glow bottom-10 right-10" style="background: rgba(99, 102, 241, 0.12);"></div>
+
+    <div class="w-full max-w-md glass-box rounded-3xl p-6 sm:p-8 space-y-6 relative z-10">
         
         <!-- Header / Judul Website -->
         <div class="text-center">
-            <span class="px-3.5 py-1.5 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold rounded-full uppercase tracking-wider shadow-inner">
+            <span class="inline-block px-4 py-1.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-extrabold rounded-full uppercase tracking-widest shadow-sm">
                 Website gw, gabut ajah
             </span>
         </div>
@@ -43,29 +81,29 @@
         <!-- Profil Utama -->
         <div class="flex flex-col items-center text-center space-y-4">
             <!-- Foto Profil -->
-            <div class="relative group">
-                <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500"></div>
-                <div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-800 shadow-xl">
+            <div class="relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full profile-ring"></div>
+                <div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-800 shadow-2xl">
                     <img src="IMG_20261119_134726.jpg" alt="Reno" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80'">
                 </div>
             </div>
 
             <div>
                 <h1 class="text-2xl font-extrabold tracking-tight text-white">Natanael Alfareno Narendra <span class="text-cyan-400 font-normal text-lg">(Reno)</span></h1>
-                <p class="text-sm text-slate-400 font-medium mt-1">SMP Pangudi Luhur Jakarta</p>
+                <p class="text-sm text-slate-400 font-semibold mt-1">SMP Pangudi Luhur Jakarta</p>
             </div>
 
             <!-- Bio -->
-            <div class="w-full bg-slate-800/40 border border-slate-700/40 rounded-2xl p-3 text-center shadow-inner">
-                <p class="text-sm text-slate-300 italic">"Ubur-ubur ikan lele, muka lu jelek le"</p>
+            <div class="w-full bg-slate-900/60 border border-slate-800 rounded-2xl p-3.5 text-center shadow-inner">
+                <p class="text-sm text-slate-300 italic font-medium">"Ubur-ubur ikan lele, muka lu jelek le"</p>
             </div>
 
             <!-- Tombol Kontak -->
-            <div class="flex flex-col sm:flex-row gap-3 w-full pt-1">
-                <a href="https://discord.gg/CnppvSDsW2" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/25 hover:scale-[1.02]">
+            <div class="flex gap-3 w-full pt-1">
+                <a href="https://discord.gg/CnppvSDsW2" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all duration-300 shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95">
                     <i class="fa-brands fa-discord text-base"></i> Discord
                 </a>
-                <a href="https://wa.me/6281932421812" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-emerald-600/25 hover:scale-[1.02]">
+                <a href="https://wa.me/6281932421812" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:scale-105 active:scale-95">
                     <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
                 </a>
             </div>
@@ -73,65 +111,65 @@
 
         <!-- Hobi (Grid 2x2) -->
         <div class="space-y-3">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">Hobi</h2>
+            <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Hobi</h2>
             <div class="grid grid-cols-2 gap-3">
-                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg">🏊‍♂️</div>
-                    <span class="text-sm font-semibold text-white">Renang</span>
+                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-lg shadow-inner">🏊‍♂️</div>
+                    <span class="text-sm font-bold text-white">Renang</span>
                 </div>
-                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">🏸</div>
-                    <span class="text-sm font-semibold text-white">Bulutangkis</span>
+                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg shadow-inner">🏸</div>
+                    <span class="text-sm font-bold text-white">Bulutangkis</span>
                 </div>
-                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-lg">💻</div>
-                    <span class="text-sm font-semibold text-white">IT</span>
+                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-violet-500/15 text-violet-400 flex items-center justify-center text-lg shadow-inner">💻</div>
+                    <span class="text-sm font-bold text-white">IT</span>
                 </div>
-                <div class="glass-card hover-scale p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
-                    <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-lg">🥁</div>
-                    <span class="text-sm font-semibold text-white">Drum</span>
+                <div class="glass-box interactive-card p-3.5 rounded-2xl flex items-center gap-3 cursor-default">
+                    <div class="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-lg shadow-inner">🥁</div>
+                    <span class="text-sm font-bold text-white">Drum</span>
                 </div>
             </div>
         </div>
 
         <!-- Inner Circle / Temen Deket -->
         <div class="space-y-3">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">Circle Gue</h2>
+            <h2 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 px-1">Circle Gue</h2>
             <div class="space-y-2.5">
                 <!-- Efraim -->
-                <div class="glass-card hover-scale p-3 rounded-2xl flex items-center gap-3.5">
+                <div class="glass-box interactive-card p-3 rounded-2xl flex items-center gap-3.5">
                     <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700 shadow-md">
                         <img src="IMG-20261119-WA0001.jpg" alt="Efraim" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
                     </div>
                     <div>
                         <h3 class="text-sm font-bold text-white">Efraim</h3>
-                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">temen banyak bacot tapi jago bultang</p>
+                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed font-medium">temen banyak bacot tapi jago bultang</p>
                     </div>
                 </div>
 
                 <!-- Indra -->
-                <div class="glass-card hover-scale p-3 rounded-2xl flex items-center gap-3.5">
+                <div class="glass-box interactive-card p-3 rounded-2xl flex items-center gap-3.5">
                     <div class="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-700 flex-shrink-0 border border-slate-700 flex items-center justify-center text-white font-bold text-base shadow-md">I</div>
                     <div>
                         <h3 class="text-sm font-bold text-white">Indra</h3>
-                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">temen ego besar temen mabar suka voli</p>
+                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed font-medium">temen ego besar temen mabar suka voli</p>
                     </div>
                 </div>
 
                 <!-- Gavin -->
-                <div class="glass-card hover-scale p-3 rounded-2xl flex items-center gap-3.5">
+                <div class="glass-box interactive-card p-3 rounded-2xl flex items-center gap-3.5">
                     <div class="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-700 flex-shrink-0 border border-slate-700 flex items-center justify-center text-white font-bold text-base shadow-md">G</div>
                     <div>
                         <h3 class="text-sm font-bold text-white">Gavin</h3>
-                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">keren dikit, suka futsal, temen mabar</p>
+                        <p class="text-xs text-slate-400 mt-0.5 leading-relaxed font-medium">keren dikit, suka futsal, temenmabar</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
-        <div class="text-center pt-1">
-            <p class="text-xs text-slate-500 font-medium">© 2026 Reno. All rights reserved.</p>
+        <div class="text-center pt-2">
+            <p class="text-xs text-slate-500 font-semibold">© 2026 Reno. All rights reserved.</p>
         </div>
 
     </div>
