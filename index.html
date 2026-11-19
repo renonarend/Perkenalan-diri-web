@@ -1,289 +1,125 @@
 <!DOCTYPE html>
-<html lang="id" class="dark scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reno | Natanael Alfareno Narendra</title>
-    
-    <!-- Tailwind CSS -->
+    <title>Reno's Zone</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Konfigurasi Font Tailwind -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        display: ['"Space Grotesk"', 'sans-serif'],
-                    }
-                }
-            }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
         }
-    </script>
+    </style>
 </head>
-<body class="bg-[#09090b] text-zinc-100 min-h-screen antialiased selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden relative">
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6">
 
-    <!-- Efek Cahaya Latar Belakang (Ambient Glow) -->
-    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div class="absolute -top-28 left-1/2 -translate-x-1/2 w-80 h-80 sm:w-[30rem] sm:h-[30rem] bg-indigo-600/20 rounded-full blur-3xl"></div>
-        <div class="absolute top-1/2 -left-24 w-72 h-72 sm:w-96 sm:h-96 bg-cyan-500/15 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 right-0 w-80 h-80 sm:w-96 sm:h-96 bg-purple-600/15 rounded-full blur-3xl"></div>
-    </div>
-
-    <!-- Notifikasi Toast saat Salin Link / Nomor -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300">
-        <div class="bg-[#121215]/95 backdrop-blur-md border border-cyan-500/40 text-cyan-300 px-4 py-2.5 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm font-medium whitespace-nowrap">
-            <svg class="w-4 h-4 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span id="toastMessage">Tersalin</span>
-        </div>
-    </div>
-
-    <!-- CONTAINER UTAMA SINGLE-COLUMN -->
-    <main class="max-w-lg mx-auto px-4 py-8 sm:py-12 space-y-6">
-
-        <!-- BADGE ATAS -->
-        <header class="text-center">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-[#121215]/90 border border-zinc-800 text-xs sm:text-sm font-semibold text-zinc-300 tracking-wide">
+    <div class="w-full max-w-md bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+        
+        <!-- Header / Judul Website -->
+        <div class="text-center">
+            <span class="px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold rounded-full uppercase tracking-wider">
                 Website gw, gabut ajah
             </span>
-        </header>
+        </div>
 
-        <!-- ========================================== -->
-        <!-- KARTU 1: PROFIL UTAMA, NAMA, SEKOLAH & KONTAK -->
-        <!-- ========================================== -->
-        <section class="bg-[#121215]/80 backdrop-blur-xl border border-zinc-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/60 text-center relative overflow-hidden">
-            <!-- Garis Aksen Atas -->
-            <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-indigo-500 via-cyan-400 to-purple-500"></div>
-
-            <!-- Foto Profil Bulat dengan Ring Gradient -->
-            <div class="relative w-32 h-32 mx-auto mb-5">
-                <div class="absolute -inset-1 rounded-full bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500 blur-sm opacity-75"></div>
-                <div class="relative w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500">
-                    <div class="w-full h-full rounded-full overflow-hidden bg-zinc-800 relative">
-                        <img 
-                            src="IMG_20261119_134726.jpg" 
-                            alt="Reno" 
-                            class="w-full h-full object-cover object-top"
-                            onerror="this.style.display='none'; document.getElementById('fallbackAvatar').classList.remove('hidden');"
-                        >
-                        <!-- Fallback SVG Avatar Default WhatsApp jika gambar gagal dimuat -->
-                        <svg id="fallbackAvatar" viewBox="0 0 212 212" class="hidden w-full h-full" fill="currentColor" aria-label="Avatar Reno">
-                            <rect width="212" height="212" fill="#3f3f46"></rect>
-                            <path fill="#a1a1aa" d="M106 116.5c21.8 0 39.5-17.7 39.5-39.5S127.8 37.5 106 37.5 66.5 55.2 66.5 77s17.7 39.5 39.5 39.5zm0 19.8c-26.4 0-79 13.2-79 39.5V212h158v-36.2c0-26.3-52.6-39.5-79-39.5z"></path>
-                        </svg>
-                    </div>
+        <!-- Profil Utama -->
+        <div class="flex flex-col items-center text-center space-y-4">
+            <!-- Foto Profil (Ganti src ke nama file foto lu kalau mau pakai file lokal) -->
+            <div class="relative">
+                <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-cyan-500/30 shadow-lg bg-slate-800">
+                    <img src="IMG_20261119_134726.jpg" alt="Reno" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80'">
                 </div>
             </div>
 
-            <!-- Nama Panggilan & Nama Lengkap -->
-            <h1 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                Reno
-            </h1>
-            <p class="text-sm sm:text-base text-zinc-400 font-medium mt-1">
-                Natanael Alfareno Narendra
-            </p>
-
-            <!-- Badge Sekolah Asal -->
-            <div class="mt-3.5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs sm:text-sm font-medium">
-                <svg class="w-4 h-4 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                </svg>
-                <span>SMP Pangudi Luhur Jakarta</span>
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tight text-white">Natanael Alfareno Narendra <span class="text-cyan-400 font-normal text-lg">(Reno)</span></h1>
+                <p class="text-sm text-slate-400 font-medium mt-1">SMP Pangudi Luhur Jakarta</p>
             </div>
 
-            <!-- Box Bio -->
-            <div class="mt-5 p-4 rounded-2xl bg-[#09090b]/85 border border-zinc-800/90">
-                <p class="text-sm sm:text-base text-zinc-200 font-medium italic">
-                    "Ubur-ubur ikan lele, muka lu jelek le"
-                </p>
+            <!-- Bio -->
+            <div class="w-full bg-slate-800/50 border border-slate-700/50 rounded-2xl p-3 text-center">
+                <p class="text-sm text-slate-300 italic">"Ubur-ubur ikan lele, muka lu jelek le"</p>
             </div>
 
-            <!-- Tombol Kontak Discord & WhatsApp -->
-            <div class="mt-5 space-y-2.5 text-left">
-                <!-- Baris Discord -->
-                <div class="flex items-center gap-2">
-                    <a href="https://discord.gg/CnppvSDsW2" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-2.5 px-4 py-3 rounded-2xl bg-[#5865F2] hover:bg-[#4752C4] active:scale-[0.99] text-white font-semibold text-sm transition-all shadow-lg shadow-[#5865F2]/25">
-                        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                        </svg>
-                        <span>Discord</span>
-                    </a>
-                    <button type="button" onclick="copyText('https://discord.gg/CnppvSDsW2', 'Link Discord tersalin')" class="px-4 py-3 rounded-2xl bg-[#09090b] hover:bg-zinc-800 active:scale-[0.98] border border-zinc-800 text-zinc-300 text-xs sm:text-sm font-semibold transition-all shrink-0">
-                        Salin
-                    </button>
-                </div>
-
-                <!-- Baris WhatsApp -->
-                <div class="flex items-center gap-2">
-                    <a href="https://wa.me/6281932421812" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-2.5 px-4 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] text-white font-semibold text-sm transition-all shadow-lg shadow-emerald-600/20">
-                        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
-                        </svg>
-                        <span>+62 819-3242-1812</span>
-                    </a>
-                    <button type="button" onclick="copyText('+62 819-3242-1812', 'Nomor WhatsApp tersalin')" class="px-4 py-3 rounded-2xl bg-[#09090b] hover:bg-zinc-800 active:scale-[0.98] border border-zinc-800 text-zinc-300 text-xs sm:text-sm font-semibold transition-all shrink-0">
-                        Salin
-                    </button>
-                </div>
+            <!-- Tombol Kontak -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full pt-2">
+                <a href="https://discord.gg/CnppvSDsW2" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/20">
+                    <i class="fa-brands fa-discord"></i> Discord
+                </a>
+                <a href="https://wa.me/6281932421812" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2.5 px-4 rounded-xl text-sm transition-all shadow-lg shadow-emerald-600/20">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
             </div>
-        </section>
+        </div>
 
-        <!-- ========================================== -->
-        <!-- KARTU 2: HOBI (GRID 2x2 IKON + JUDUL SAJA) -->
-        <!-- ========================================== -->
-        <section class="bg-[#121215]/80 backdrop-blur-xl border border-zinc-800/90 rounded-3xl p-6 sm:p-7 shadow-xl shadow-black/50">
-            <h2 class="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2 mb-4">
-                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                Hobi
-            </h2>
-
+        <!-- Hobi (Grid 2x2) -->
+        <div class="space-y-3">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400">Hobi</h2>
             <div class="grid grid-cols-2 gap-3">
-                <!-- Hobi 1: Renang -->
-                <div class="flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl bg-[#09090b]/80 border border-zinc-800/90 hover:border-cyan-500/40 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15c2.483 0 4.345-1 6-3 1.655 2 3.517 3 6 3s4.345-1 6-3M3 19c2.483 0 4.345-1 6-3 1.655 2 3.517 3 6 3s4.345-1 6-3M14 7a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-display font-bold text-white text-sm sm:text-base">Renang</h3>
+                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold">🏊</div>
+                    <span class="text-sm font-semibold text-white">Renang</span>
                 </div>
-
-                <!-- Hobi 2: Bulutangkis -->
-                <div class="flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl bg-[#09090b]/80 border border-zinc-800/90 hover:border-indigo-500/40 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-display font-bold text-white text-sm sm:text-base">Bulutangkis</h3>
+                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold">🏸</div>
+                    <span class="text-sm font-semibold text-white">Bulutangkis</span>
                 </div>
-
-                <!-- Hobi 3: IT -->
-                <div class="flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl bg-[#09090b]/80 border border-zinc-800/90 hover:border-purple-500/40 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-display font-bold text-white text-sm sm:text-base">IT</h3>
+                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center font-bold">💻</div>
+                    <span class="text-sm font-semibold text-white">IT</span>
                 </div>
-
-                <!-- Hobi 4: Drum -->
-                <div class="flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl bg-[#09090b]/80 border border-zinc-800/90 hover:border-amber-500/40 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <ellipse cx="12" cy="11" rx="8" ry="3.5" stroke-width="2"></ellipse>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 11v5c0 1.933 3.582 3.5 8 3.5s8-1.567 8-3.5v-5M8 14.2v4.8M16 14.2v4.8M5 4l5.5 4.5M19 4l-5.5 4.5"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-display font-bold text-white text-sm sm:text-base">Drum</h3>
+                <div class="bg-slate-800/60 border border-slate-700/50 p-3.5 rounded-2xl flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold">🥁</div>
+                    <span class="text-sm font-semibold text-white">Drum</span>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- ========================================== -->
-        <!-- KARTU 3: TEMEN DEKET                       -->
-        <!-- ========================================== -->
-        <section class="bg-[#121215]/80 backdrop-blur-xl border border-zinc-800/90 rounded-3xl p-6 sm:p-7 shadow-xl shadow-black/50">
-            <h2 class="font-display text-lg sm:text-xl font-bold text-white flex items-center gap-2 mb-4">
-                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
-                Temen Deket
-            </h2>
-
-            <div class="space-y-3">
-                <!-- Teman 1: Efraim -->
-                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#09090b]/80 border border-zinc-800/90 hover:border-indigo-500/40 transition-colors">
-                    <div class="w-12 h-12 rounded-full bg-zinc-700 overflow-hidden shrink-0 border-2 border-zinc-700">
-                        <svg viewBox="0 0 212 212" class="w-full h-full" fill="currentColor" aria-label="Avatar Efraim">
-                            <rect width="212" height="212" fill="#3f3f46"></rect>
-                            <path fill="#a1a1aa" d="M106 116.5c21.8 0 39.5-17.7 39.5-39.5S127.8 37.5 106 37.5 66.5 55.2 66.5 77s17.7 39.5 39.5 39.5zm0 19.8c-26.4 0-79 13.2-79 39.5V212h158v-36.2c0-26.3-52.6-39.5-79-39.5z"></path>
-                        </svg>
+        <!-- Inner Circle / Temen Deket -->
+        <div class="space-y-3">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400">Circle Gue</h2>
+            <div class="space-y-2.5">
+                <!-- Efraim -->
+                <div class="bg-slate-800/40 border border-slate-700/40 p-3 rounded-2xl flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-700 flex-shrink-0 border border-slate-600">
+                        <img src="IMG-20261119-WA0001.jpg" alt="Efraim" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
                     </div>
-                    <div class="min-w-0 flex-1">
-                        <h3 class="font-display font-bold text-white text-sm sm:text-base">Efraim</h3>
-                        <p class="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                            temen banyak bacot tapi jago bultang
-                        </p>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Efraim</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">temen banyak bacot tapi jago bultang</p>
                     </div>
                 </div>
 
-                <!-- Teman 2: Indra -->
-                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#09090b]/80 border border-zinc-800/90 hover:border-purple-500/40 transition-colors">
-                    <div class="w-12 h-12 rounded-full bg-zinc-700 overflow-hidden shrink-0 border-2 border-zinc-700">
-                        <svg viewBox="0 0 212 212" class="w-full h-full" fill="currentColor" aria-label="Avatar Indra">
-                            <rect width="212" height="212" fill="#3f3f46"></rect>
-                            <path fill="#a1a1aa" d="M106 116.5c21.8 0 39.5-17.7 39.5-39.5S127.8 37.5 106 37.5 66.5 55.2 66.5 77s17.7 39.5 39.5 39.5zm0 19.8c-26.4 0-79 13.2-79 39.5V212h158v-36.2c0-26.3-52.6-39.5-79-39.5z"></path>
-                        </svg>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                        <h3 class="font-display font-bold text-white text-sm sm:text-base">Indra</h3>
-                        <p class="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                            temen ego besar temen mabar suka voli
-                        </p>
+                <!-- Indra -->
+                <div class="bg-slate-800/40 border border-slate-700/40 p-3 rounded-2xl flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-700 flex-shrink-0 border border-slate-600 flex items-center justify-center text-slate-300 font-bold">I</div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Indra</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">temen ego besar temen mabar suka voli</p>
                     </div>
                 </div>
 
-                <!-- Teman 3: Gavin -->
-                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#09090b]/80 border border-zinc-800/90 hover:border-cyan-500/40 transition-colors">
-                    <div class="w-12 h-12 rounded-full bg-zinc-700 overflow-hidden shrink-0 border-2 border-zinc-700">
-                        <svg viewBox="0 0 212 212" class="w-full h-full" fill="currentColor" aria-label="Avatar Gavin">
-                            <rect width="212" height="212" fill="#3f3f46"></rect>
-                            <path fill="#a1a1aa" d="M106 116.5c21.8 0 39.5-17.7 39.5-39.5S127.8 37.5 106 37.5 66.5 55.2 66.5 77s17.7 39.5 39.5 39.5zm0 19.8c-26.4 0-79 13.2-79 39.5V212h158v-36.2c0-26.3-52.6-39.5-79-39.5z"></path>
-                        </svg>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                        <h3 class="font-display font-bold text-white text-sm sm:text-base">Gavin</h3>
-                        <p class="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                            keren dikit, suka futsal, temenmabar
-                        </p>
+                <!-- Gavin -->
+                <div class="bg-slate-800/40 border border-slate-700/40 p-3 rounded-2xl flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-700 flex-shrink-0 border border-slate-600 flex items-center justify-center text-slate-300 font-bold">G</div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Gavin</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">keren dikit, suka futsal, temen mabar</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-    </main>
+        <!-- Footer -->
+        <div class="text-center pt-2">
+            <p class="text-xs text-slate-500">© 2026 Reno. All rights reserved.</p>
+        </div>
 
-    <!-- Script Copy Clipboard -->
-    <script>
-        let toastTimeout;
-        function copyText(text, message) {
-            try {
-                const tempInput = document.createElement('input');
-                tempInput.value = text;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                tempInput.setSelectionRange(0, 99999);
-                document.execCommand('copy');
-                document.body.removeChild(tempInput);
+    </div>
 
-                const toast = document.getElementById('toast');
-                const toastMsg = document.getElementById('toastMessage');
-                if (toast && toastMsg) {
-                    toastMsg.textContent = message;
-                    toast.classList.remove('opacity-0', 'translate-y-4');
-                    toast.classList.add('opacity-100', 'translate-y-0');
-
-                    clearTimeout(toastTimeout);
-                    toastTimeout = setTimeout(() => {
-                        toast.classList.remove('opacity-100', 'translate-y-0');
-                        toast.classList.add('opacity-0', 'translate-y-4');
-                    }, 2200);
-                }
-            } catch (err) {
-                console.error('Gagal menyalin teks:', err);
-            }
-        }
-    </script>
 </body>
 </html>
-```
