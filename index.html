@@ -65,7 +65,7 @@
             <!-- Garis Aksen Neon Atas -->
             <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-500 via-cyan-400 to-purple-500"></div>
 
-            <!-- Foto Profil Auto-Crop Orang Paling Kiri dari IMG-20261020-WA0007.jpg -->
+            <!-- Foto Profil Auto-Crop Orang Paling Kiri dari IMG_20261119_134726.jpg -->
             <div class="flex flex-col items-center text-center">
                 <div class="relative mb-4 group">
                     <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-indigo-500 via-cyan-400 to-purple-500 shadow-xl shadow-cyan-500/20">
@@ -75,13 +75,13 @@
                             
                             <!-- Fallback CSS Zoom tepat ke wajah orang paling kiri -->
                             <img id="avatarFallbackImg"
-                                 src="IMG-20261020-WA0007.jpg"
+                                 src="IMG_20261119_134726.jpg"
                                  alt="Reno"
                                  style="object-position: 18% 22%; transform: scale(2.8);"
                                  class="w-full h-full object-cover transition-transform duration-500"
                                  onerror="this.style.display='none'; document.getElementById('avatarSvgFallback').classList.remove('hidden');">
                             
-                            <!-- Fallback Avatar Default WhatsApp jika file IMG-20261020-WA0007.jpg tidak ditemukan -->
+                            <!-- Fallback Avatar Default WhatsApp jika file IMG_20261119_134726.jpg tidak ditemukan -->
                             <svg id="avatarSvgFallback" viewBox="0 0 212 212" class="hidden w-full h-full" fill="currentColor" aria-label="Avatar Default">
                                 <rect width="212" height="212" fill="#3f3f46"></rect>
                                 <path fill="#a1a1aa" d="M106 116.5c21.8 0 39.5-17.7 39.5-39.5S127.8 37.5 106 37.5 66.5 55.2 66.5 77s17.7 39.5 39.5 39.5zm0 19.8c-26.4 0-79 13.2-79 39.5V212h158v-36.2c0-26.3-52.6-39.5-79-39.5z"></path>
@@ -254,7 +254,7 @@
                     <div class="min-w-0 flex-1">
                         <h3 class="font-display font-bold text-white text-sm sm:text-base">Indra</h3>
                         <p class="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                            temen ego besar temen mabar suka voli
+                            temen ego besar, temen mabar, suka voli
                         </p>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
                     <div class="min-w-0 flex-1">
                         <h3 class="font-display font-bold text-white text-sm sm:text-base">Gavin</h3>
                         <p class="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                            keren dikit, suka futsal, temenmabar
+                            keren dikit, suka futsal, temen mabar
                         </p>
                     </div>
                 </div>
@@ -287,7 +287,7 @@
     <!-- Script Auto-Crop Foto & Copy Clipboard -->
     <script>
         /**
-         * Auto-crop wajah orang paling kiri dari gambar IMG-20261020-WA0007.jpg menggunakan HTML5 Canvas
+         * Auto-crop wajah orang paling kiri dari gambar IMG_20261119_134726.jpg menggunakan HTML5 Canvas
          */
         function cropLeftPersonAvatar() {
             const canvas = document.getElementById('avatarCanvas');
@@ -295,19 +295,9 @@
             if (!canvas || !fallbackImg) return;
 
             const img = new Image();
-            img.src = 'IMG-20261020-WA0007.jpg';
+            img.src = 'IMG_20261119_134726.jpg';
 
             img.onload = function () {
                 try {
-                    const ctx = canvas.getContext('2d');
-                    const size = 400;
-                    canvas.width = size;
-                    canvas.height = size;
-
-                    // Koordinat wajah & bahu orang paling kiri pada foto IMG-20261020-WA0007.jpg
-                    const sx = img.naturalWidth * 0.04;
-                    const sy = img.naturalHeight * 0.26;
-                    const sWidth = img.naturalWidth * 0.28;
-                    const sHeight = sWidth;
 // ... existing code ... -->
 ```
